@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/user_service
+    username: username
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  sql:
+    init:
+      mode: always
+  mail:
+    host: smtp-server.com
+    port: 587
+    username: email@example.com
+    password: email-password
+
+springdoc:
+  show-login-endpoint: true
+
+jwt:
+  secret: 6A576D5A7134743777217A25432A462D4A614E645267556B5870327235753878
+  access-token:
+    expiration: 1800000 #30m
+  refresh-token:
+    expiration: 86400000 #24h
+  password-recovery-request-token:
+    expiration: 300000 #5m
+
+logging:
+  level:
+    org.springframework.security: DEBUG
