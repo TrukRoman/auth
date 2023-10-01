@@ -23,6 +23,8 @@ import java.util.List;
 )
 public class OpenAPIConfiguration {
 
+    public static final String BEARER_AUTHENTICATION = "Bearer Authentication";
+
 //    @Bean
 //    public OpenAPI customOpenAPI() {
 //        return new OpenAPI()

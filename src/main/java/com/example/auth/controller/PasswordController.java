@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.example.auth.config.OpenAPIConfiguration.BEARER_AUTHENTICATION;
+
 @Slf4j
 @RestController
 @AllArgsConstructor
@@ -69,7 +71,7 @@ public class PasswordController {
         return ResponseEntity.ok().build();
     }
 
-    @SecurityRequirement(name = "Bearer Authentication")
+    @SecurityRequirement(name = BEARER_AUTHENTICATION)
     @ApiResponse(responseCode = "200",
             description = "Successful response.")
     @ApiResponse(responseCode = "401",

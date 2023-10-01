@@ -31,11 +31,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static com.example.auth.config.OpenAPIConfiguration.BEARER_AUTHENTICATION;
+
 @Slf4j
 @RestController
 @AllArgsConstructor
 @RequestMapping("/admin")
-@SecurityRequirement(name = "Bearer Authentication")
+@SecurityRequirement(name = BEARER_AUTHENTICATION)
 @Tag(name = "Admin API", description = "API for administrator")
 public class AdminController {
 

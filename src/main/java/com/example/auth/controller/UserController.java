@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.example.auth.config.OpenAPIConfiguration.BEARER_AUTHENTICATION;
+
 @Slf4j
 @RestController
 @AllArgsConstructor
@@ -31,7 +33,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @SecurityRequirement(name = "Bearer Authentication")
+    @SecurityRequirement(name = BEARER_AUTHENTICATION)
     @ApiResponse(responseCode = "200",
             description = "Successful response with user's information.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
@@ -51,7 +53,7 @@ public class UserController {
         return ResponseEntity.ok(userDetailsDto);
     }
 
-    @SecurityRequirement(name = "Bearer Authentication")
+    @SecurityRequirement(name = BEARER_AUTHENTICATION)
     @ApiResponse(responseCode = "200",
             description = "Successful response with updated user information.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
@@ -71,7 +73,7 @@ public class UserController {
         return ResponseEntity.ok(userInfoDto);
     }
 
-    @SecurityRequirement(name = "Bearer Authentication")
+    @SecurityRequirement(name = BEARER_AUTHENTICATION)
     @ApiResponse(responseCode = "200",
             description = "Successful response with admin user's information.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
