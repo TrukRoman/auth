@@ -60,12 +60,12 @@ public class AuthenticationController {
             description = "Validation error in the request body.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorResponse.class)))
-    @ApiResponse(responseCode = "404",
-            description = "User not found.",
-            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = ErrorResponse.class)))
     @ApiResponse(responseCode = "401",
             description = "Refresh token has expired.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "404",
+            description = "User not found.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorResponse.class)))
     @PostMapping("/refresh-token")
@@ -77,6 +77,14 @@ public class AuthenticationController {
     @ApiResponse(responseCode = "200",
             description = "Successful logout",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE))
+    @ApiResponse(responseCode = "401",
+            description = "Unauthorized access. Please provide a valid token.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "404",
+            description = "User not found.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
     @SecurityRequirement(name = BEARER_AUTHENTICATION)
     @GetMapping("/logout")
     public void logout(HttpServletRequest request, HttpServletResponse response) {
