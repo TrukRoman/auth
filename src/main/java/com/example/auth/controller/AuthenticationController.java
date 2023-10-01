@@ -42,8 +42,8 @@ public class AuthenticationController {
             description = "Validation error in the request body.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorResponse.class)))
-    @ApiResponse(responseCode = "404",
-            description = "User not found.",
+    @ApiResponse(responseCode = "403",
+            description = "Invalid username or password.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorResponse.class)))
     @PostMapping("/authenticate")
