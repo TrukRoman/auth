@@ -1,6 +1,10 @@
 package com.example.auth.dto;
 
-public record UserInfoDto(String email,
+import java.util.List;
+
+public record UserInfoDto(Long id,
+                          String email,
                           String firstName,
-                          String lastName) {
+                          String lastName,
+                          List<String> phoneNumbers) {
 }

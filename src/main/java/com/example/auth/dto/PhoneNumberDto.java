@@ -1,4 +1,5 @@
 package com.example.auth.dto;
 
-public record PhoneNumberDto(String phoneNumber) {
+public record PhoneNumberDto(Long id,
+                             String phoneNumber) {
 }
