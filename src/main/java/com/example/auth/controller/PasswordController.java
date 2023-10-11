@@ -87,7 +87,7 @@ public class PasswordController {
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorResponse.class)))
     @Operation(method = "Change password")
-    @PostMapping(value = "/password/change")
+    @PostMapping(value = "/change")
     public ResponseEntity<Void> changePassword(@RequestBody @Valid ChangePasswordRequest changePasswordRequest) {
         passwordService.changePassword(changePasswordRequest);
         return ResponseEntity.ok().build();

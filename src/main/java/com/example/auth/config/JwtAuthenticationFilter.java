@@ -1,7 +1,7 @@
 package com.example.auth.config;
 
-import com.example.auth.entity.User;
-import com.example.auth.repository.UserRepository;
+import com.example.auth.entity.AccessToken;
+import com.example.auth.repository.AccessTokenRepository;
 import com.example.auth.util.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Optional;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
@@ -30,7 +29,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
     private final UserDetailsService userDetailsService;
-    private final UserRepository userRepository;
+    private final AccessTokenRepository accessTokenRepository;
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
@@ -49,10 +48,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
-            Optional<User> userByEmail = userRepository.findUserByEmail(userEmail);
-            boolean isTokenRevoked = jwtUtil.isAccessTokenRevoked(userByEmail, jwt);
+            AccessToken dbAccessToken = accessTokenRepository.findByToken(jwt);
 
-            if (jwtUtil.isTokenValid(jwt, userDetails) && !isTokenRevoked) {
+            if (jwtUtil.isTokenValid(jwt, userDetails) && !jwtUtil.isAccessTokenRevoked(dbAccessToken)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,

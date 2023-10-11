@@ -64,11 +64,11 @@ public class User implements UserDetails {
     @Column(name = "role")
     private Role role = Role.USER;
 
-    @Column(name = "access_token")
-    private String accessToken;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<AccessToken> accessTokens;
 
-    @Column(name = "refresh_token")
-    private String refreshToken;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<RefreshToken> refreshTokens;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

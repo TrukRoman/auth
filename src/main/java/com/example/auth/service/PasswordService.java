@@ -24,6 +24,8 @@ public class PasswordService {
     private final PasswordValidator passwordValidator;
     private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
+    private final AccessTokenService accessTokenService;
+    private final RefreshTokenService refreshTokenService;
 
     @Transactional(readOnly = true)
     public void recoveryPasswordSendRequest(String email) {
@@ -40,6 +42,8 @@ public class PasswordService {
         User user = userRepository.findUserByEmail(userEmail)
                 .orElseThrow(() -> new ServiceException(USER_NOT_FOUND));
         user.setPassword(passwordEncoder.encode(request.newPassword()));
+        accessTokenService.revokeActiveTokens(user.getId());
+        refreshTokenService.revokeActiveTokens(user.getId());
     }
 
     @Transactional
@@ -47,8 +51,8 @@ public class PasswordService {
         User user = SecurityUtils.getUser();
         passwordValidator.isCorrectPreviousPassword(request.previousPassword(), user);
         user.setPassword(passwordEncoder.encode(request.newPassword()));
-        user.setAccessToken(null);
-        user.setRefreshToken(null);
+        accessTokenService.revokeActiveTokens(user.getId());
+        refreshTokenService.revokeActiveTokens(user.getId());
         userRepository.save(user);
     }
     

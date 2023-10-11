@@ -1,5 +1,7 @@
 package com.example.auth.util;
 
+import com.example.auth.entity.AccessToken;
+import com.example.auth.entity.RefreshToken;
 import com.example.auth.entity.User;
 import com.example.auth.exception.ExceptionType;
 import com.example.auth.exception.ServiceException;
@@ -87,14 +89,12 @@ public class JwtUtil {
                 .compact();
     }
 
-    public boolean isAccessTokenRevoked(Optional<User> user,
-                                        String token) {
-        return user.isPresent() && !Objects.equals(token, user.get().getAccessToken());
+    public boolean isAccessTokenRevoked(AccessToken accessToken) {
+        return accessToken.isRevoked();
     }
 
-    public boolean isRefreshTokenRevoked(Optional<User> user,
-                                         String token) {
-        return user.isPresent() && !Objects.equals(token, user.get().getRefreshToken());
+    public boolean isRefreshTokenRevoked(RefreshToken refreshToken) {
+        return refreshToken.isRevoked();
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {

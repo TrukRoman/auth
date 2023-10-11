@@ -123,6 +123,11 @@ public class UserService {
         return userMapper.mapToUserDetails(adminUser);
     }
 
+    public User findUserByEmail(String email) {
+        return userRepository.findUserByEmail(email)
+                .orElseThrow(() -> new ServiceException(USER_NOT_FOUND));
+    }
+
     private List<PhoneNumber> createPhoneNumbers(List<String> phoneNumbers, User user) {
         return phoneNumbers.stream().map(phoneNumber -> {
             PhoneNumber phone = new PhoneNumber();
@@ -131,5 +136,4 @@ public class UserService {
             return phone;
         }).collect(Collectors.toList());
     }
-
 }

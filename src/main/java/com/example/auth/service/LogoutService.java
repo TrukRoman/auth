@@ -1,10 +1,7 @@
 package com.example.auth.service;
 
 import com.example.auth.entity.User;
-import com.example.auth.exception.ExceptionType;
-import com.example.auth.exception.ServiceException;
-import com.example.auth.repository.UserRepository;
-import com.example.auth.util.JwtUtil;
+import com.example.auth.util.SecurityUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +18,8 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 @RequiredArgsConstructor
 public class LogoutService implements LogoutHandler {
 
-    private final JwtUtil jwtUtil;
-    private final UserRepository userRepository;
+    private final AccessTokenService accessTokenService;
+    private final RefreshTokenService refreshTokenService;
 
     @Transactional
     @Override
@@ -33,11 +30,9 @@ public class LogoutService implements LogoutHandler {
         if (authHeader == null || !authHeader.startsWith(BEARER)) {
             return;
         }
-        String jwt = authHeader.substring(BEARER.length());
-        String userEmail = jwtUtil.extractUserEmail(jwt);
-        User user = userRepository.findUserByEmail(userEmail)
-                .orElseThrow(() -> new ServiceException(ExceptionType.USER_NOT_FOUND));
-        user.setAccessToken(null);
+        User user = SecurityUtils.getUser();
+        accessTokenService.revokeActiveTokens(user.getId());
+        refreshTokenService.revokeActiveTokens(user.getId());
         SecurityContextHolder.clearContext();
     }
 }
