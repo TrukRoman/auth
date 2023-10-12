@@ -1,7 +1,7 @@
 package com.example.auth.controller;
 
-import com.example.auth.dto.ChangePasswordRequest;
-import com.example.auth.dto.NewPasswordRequest;
+import com.example.auth.dto.password.ChangePasswordRequest;
+import com.example.auth.dto.password.NewPasswordRequest;
 import com.example.auth.dto.error.ErrorResponse;
 import com.example.auth.service.PasswordService;
 import io.swagger.v3.oas.annotations.Operation;

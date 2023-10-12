@@ -1,9 +1,9 @@
 package com.example.auth.controller;
 
-import com.example.auth.dto.UpdateUserRequest;
-import com.example.auth.dto.UpdateUserResponse;
-import com.example.auth.dto.UserDetailsDto;
-import com.example.auth.dto.UserInfoDto;
+import com.example.auth.dto.user.UpdateUserRequest;
+import com.example.auth.dto.user.UpdateUserResponse;
+import com.example.auth.dto.user.UserDetailsDto;
+import com.example.auth.dto.user.UserInfoDto;
 import com.example.auth.dto.error.ErrorResponse;
 import com.example.auth.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;

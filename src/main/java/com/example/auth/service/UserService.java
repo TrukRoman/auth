@@ -1,11 +1,11 @@
 package com.example.auth.service;
 
-import com.example.auth.dto.RegistrationUserRequest;
-import com.example.auth.dto.UpdateUserRequest;
-import com.example.auth.dto.UpdateUserResponse;
-import com.example.auth.dto.UserDetailsDto;
-import com.example.auth.dto.UserInfoDto;
-import com.example.auth.dto.UserInfoEditRequest;
+import com.example.auth.dto.registration.RegistrationUserRequest;
+import com.example.auth.dto.user.UpdateUserRequest;
+import com.example.auth.dto.user.UpdateUserResponse;
+import com.example.auth.dto.user.UserDetailsDto;
+import com.example.auth.dto.user.UserInfoDto;
+import com.example.auth.dto.user.UserInfoEditRequest;
 import com.example.auth.entity.PhoneNumber;
 import com.example.auth.entity.Role;
 import com.example.auth.entity.User;

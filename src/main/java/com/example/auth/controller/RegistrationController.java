@@ -1,6 +1,6 @@
 package com.example.auth.controller;
 
-import com.example.auth.dto.RegistrationUserRequest;
+import com.example.auth.dto.registration.RegistrationUserRequest;
 import com.example.auth.dto.error.ErrorResponse;
 import com.example.auth.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;

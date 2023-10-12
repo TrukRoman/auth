@@ -1,4 +1,4 @@
-package com.example.auth.dto;
+package com.example.auth.dto.registration;
 
 import com.example.auth.validator.email.ValidEmail;
 import com.example.auth.validator.password.ValidPassword;

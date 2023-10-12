@@ -1,7 +1,7 @@
 package com.example.auth.service;
 
-import com.example.auth.dto.ChangePasswordRequest;
-import com.example.auth.dto.NewPasswordRequest;
+import com.example.auth.dto.password.ChangePasswordRequest;
+import com.example.auth.dto.password.NewPasswordRequest;
 import com.example.auth.entity.User;
 import com.example.auth.exception.ServiceException;
 import com.example.auth.repository.UserRepository;

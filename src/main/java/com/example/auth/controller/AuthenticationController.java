@@ -1,8 +1,8 @@
 package com.example.auth.controller;
 
-import com.example.auth.dto.AuthenticationRequest;
-import com.example.auth.dto.AuthenticationResponse;
-import com.example.auth.dto.TokenRefreshRequest;
+import com.example.auth.dto.auth.AuthenticationRequest;
+import com.example.auth.dto.auth.AuthenticationResponse;
+import com.example.auth.dto.auth.TokenRefreshRequest;
 import com.example.auth.dto.error.ErrorResponse;
 import com.example.auth.service.AuthenticationService;
 import com.example.auth.service.LogoutService;

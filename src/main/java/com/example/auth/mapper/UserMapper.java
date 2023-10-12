@@ -1,9 +1,9 @@
 package com.example.auth.mapper;
 
-import com.example.auth.dto.UpdateUserResponse;
-import com.example.auth.dto.UserDetailsDto;
-import com.example.auth.dto.UserInfoDto;
-import com.example.auth.dto.UserInfoEditRequest;
+import com.example.auth.dto.user.UpdateUserResponse;
+import com.example.auth.dto.user.UserDetailsDto;
+import com.example.auth.dto.user.UserInfoDto;
+import com.example.auth.dto.user.UserInfoEditRequest;
 import com.example.auth.entity.PhoneNumber;
 import com.example.auth.entity.User;
 import org.mapstruct.Mapper;

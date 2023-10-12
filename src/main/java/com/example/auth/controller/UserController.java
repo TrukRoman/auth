@@ -1,8 +1,8 @@
 package com.example.auth.controller;
 
-import com.example.auth.dto.UserDetailsDto;
-import com.example.auth.dto.UserInfoDto;
-import com.example.auth.dto.UserInfoEditRequest;
+import com.example.auth.dto.user.UserDetailsDto;
+import com.example.auth.dto.user.UserInfoDto;
+import com.example.auth.dto.user.UserInfoEditRequest;
 import com.example.auth.dto.error.ErrorResponse;
 import com.example.auth.service.UserService;
 import com.example.auth.util.SecurityUtils;
