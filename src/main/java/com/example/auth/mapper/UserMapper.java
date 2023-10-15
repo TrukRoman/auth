@@ -1,5 +1,6 @@
 package com.example.auth.mapper;
 
+import com.example.auth.dto.user.AdminInfoResponse;
 import com.example.auth.dto.user.UpdateUserResponse;
 import com.example.auth.dto.user.UserDetailsDto;
 import com.example.auth.dto.user.UserInfoDto;
@@ -24,6 +25,8 @@ public interface UserMapper {
     UpdateUserResponse mapToUpdateUserResponse(User users);
 
     UserDetailsDto mapToUserDetails(User user);
+
+    AdminInfoResponse mapToAdminInfoResponse(User user);
 
     @Mapping(target = "phoneNumbers", ignore = true)
     User mapUserInfoEditRequestToUser(UserInfoEditRequest request, @MappingTarget User user);

@@ -28,6 +28,7 @@ public class AuthenticationService {
 
     private final JwtUtil jwtUtil;
     private final UserRepository userRepository;
+    private final AccessTokenService accessTokenService;
     private final AuthenticationManager authenticationManager;
     private final RefreshTokenRepository refreshTokenRepository;
     private final AccessTokenRepository accessTokenRepository;
@@ -45,12 +46,7 @@ public class AuthenticationService {
         user.getRefreshTokens().add(refreshToken);
         user.getAccessTokens().add(createAccessToken(accessJwt, user, refreshToken));
 
-        return AuthenticationResponse.builder()
-                .accessToken(accessJwt)
-                .accessExpiresIn(jwtUtil.getAccessTokenExpiration())
-                .refreshToken(refreshJwt)
-                .refreshExpiresIn(jwtUtil.getRefreshTokenExpiration())
-                .build();
+        return getAuthenticationResponse(accessJwt, refreshJwt);
     }
 
     @Transactional
@@ -62,15 +58,10 @@ public class AuthenticationService {
         RefreshToken refreshToken = refreshTokenRepository.findByToken(request.refreshToken());
         boolean isRefreshTokenRevoked = jwtUtil.isRefreshTokenRevoked(refreshToken);
         if (jwtUtil.isTokenValid(request.refreshToken(), user) && !isRefreshTokenRevoked) {
+            accessTokenService.revokeActiveTokensByRefreshToken(request.refreshToken());
             String accessJwt = jwtUtil.generateAccessToken(user);
             user.getAccessTokens().add(createAccessToken(accessJwt, user, refreshToken));
-
-            return AuthenticationResponse.builder()
-                    .accessToken(accessJwt)
-                    .accessExpiresIn(jwtUtil.getAccessTokenExpiration())
-                    .refreshToken(request.refreshToken())
-                    .refreshExpiresIn(jwtUtil.getRefreshTokenExpiration())
-                    .build();
+            return getAuthenticationResponse(accessJwt, request.refreshToken());
         } else {
             throw new ServiceException(REFRESH_TOKEN_EXPIRED);
         }
@@ -96,5 +87,15 @@ public class AuthenticationService {
                 .build();
 
         return refreshTokenRepository.save(refreshToken);
+    }
+
+    private AuthenticationResponse getAuthenticationResponse(String accessJwt,
+                                                             String refreshJwt) {
+        return AuthenticationResponse.builder()
+                .accessToken(accessJwt)
+                .accessExpiresIn(jwtUtil.getAccessTokenExpiration())
+                .refreshToken(refreshJwt)
+                .refreshExpiresIn(jwtUtil.getRefreshTokenExpiration())
+                .build();
     }
 }

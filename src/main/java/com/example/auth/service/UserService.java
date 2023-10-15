@@ -1,6 +1,7 @@
 package com.example.auth.service;
 
 import com.example.auth.dto.registration.RegistrationUserRequest;
+import com.example.auth.dto.user.AdminInfoResponse;
 import com.example.auth.dto.user.UpdateUserRequest;
 import com.example.auth.dto.user.UpdateUserResponse;
 import com.example.auth.dto.user.UserDetailsDto;
@@ -13,7 +14,6 @@ import com.example.auth.exception.ExceptionType;
 import com.example.auth.exception.ServiceException;
 import com.example.auth.mapper.UserMapper;
 import com.example.auth.repository.UserRepository;
-import com.example.auth.util.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -118,9 +118,9 @@ public class UserService {
         return userMapper.mapToUpdateUserResponse(updatedUser);
     }
 
-    public UserDetailsDto getAdminInfo() {
+    public AdminInfoResponse getAdminInfo() {
         User adminUser = userRepository.findAdmin().orElseThrow(() -> new ServiceException(USER_NOT_FOUND));
-        return userMapper.mapToUserDetails(adminUser);
+        return userMapper.mapToAdminInfoResponse(adminUser);
     }
 
     public User findUserById(Long id) {

@@ -1,5 +1,6 @@
 package com.example.auth.controller;
 
+import com.example.auth.dto.user.AdminInfoResponse;
 import com.example.auth.dto.user.UserDetailsDto;
 import com.example.auth.dto.user.UserInfoDto;
 import com.example.auth.dto.user.UserInfoEditRequest;
@@ -38,7 +39,7 @@ public class UserController {
     @ApiResponse(responseCode = "200",
             description = "Successful response with user's information.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = UserInfoDto.class)))
+                    schema = @Schema(implementation = UserDetailsDto.class)))
     @ApiResponse(responseCode = "401",
             description = "Unauthorized access. Please provide a valid token.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
@@ -79,7 +80,7 @@ public class UserController {
     @ApiResponse(responseCode = "200",
             description = "Successful response with admin user's information.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = UserDetailsDto.class)))
+                    schema = @Schema(implementation = AdminInfoResponse.class)))
     @ApiResponse(responseCode = "401",
             description = "Unauthorized access. Please provide a valid token or the user is not an admin.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
@@ -90,8 +91,8 @@ public class UserController {
                     schema = @Schema(implementation = ErrorResponse.class)))
     @Operation(method = "Get user info")
     @GetMapping(value = "/admin/info")
-    public ResponseEntity<UserDetailsDto> getAdminInfo() {
-        UserDetailsDto adminInfo = userService.getAdminInfo();
+    public ResponseEntity<AdminInfoResponse> getAdminInfo() {
+        AdminInfoResponse adminInfo = userService.getAdminInfo();
         return ResponseEntity.ok(adminInfo);
     }
 

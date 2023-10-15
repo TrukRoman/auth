@@ -16,4 +16,10 @@ public class AccessTokenService {
         accessTokenRepository.findActiveTokens(userId)
                 .forEach(token -> token.setRevoked(Boolean.TRUE));
     }
+
+    @Transactional
+    public void revokeActiveTokensByRefreshToken(String refreshToken) {
+        accessTokenRepository.findActiveAccessTokensByRefreshToken(refreshToken)
+                .forEach(token -> token.setRevoked(Boolean.TRUE));
+    }
 }
