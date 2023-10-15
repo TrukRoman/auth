@@ -41,7 +41,11 @@ public class UserController {
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = UserDetailsDto.class)))
     @ApiResponse(responseCode = "401",
-            description = "Unauthorized access. Please provide a valid token.",
+            description = "Unauthorized - Authentication failure.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "403",
+            description = "Forbidden - Access denied.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorResponse.class)))
     @ApiResponse(responseCode = "404",
@@ -60,12 +64,16 @@ public class UserController {
             description = "Successful response with updated user information.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = UserInfoDto.class)))
-    @ApiResponse(responseCode = "401",
-            description = "Unauthorized access. Please provide a valid token.",
-            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = ErrorResponse.class)))
     @ApiResponse(responseCode = "400",
             description = "Validation error in the request body.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "401",
+            description = "Unauthorized - Authentication failure.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "403",
+            description = "Forbidden - Access denied.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorResponse.class)))
     @Operation(method = "Edit user info")
@@ -82,7 +90,11 @@ public class UserController {
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = AdminInfoResponse.class)))
     @ApiResponse(responseCode = "401",
-            description = "Unauthorized access. Please provide a valid token or the user is not an admin.",
+            description = "Unauthorized - Authentication failure.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "403",
+            description = "Forbidden - Access denied.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorResponse.class)))
     @ApiResponse(responseCode = "404",

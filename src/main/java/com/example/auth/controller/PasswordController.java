@@ -35,12 +35,12 @@ public class PasswordController {
 
     @ApiResponse(responseCode = "200",
             description = "Successful response.")
-    @ApiResponse(responseCode = "404",
-            description = "User not found.",
-            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = ErrorResponse.class)))
     @ApiResponse(responseCode = "400",
             description = "Validation error in the request.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "404",
+            description = "User not found.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorResponse.class)))
     @Operation(method = "Password recovery request")
@@ -74,16 +74,20 @@ public class PasswordController {
     @SecurityRequirement(name = BEARER_AUTHENTICATION)
     @ApiResponse(responseCode = "200",
             description = "Successful response.")
-    @ApiResponse(responseCode = "401",
-            description = "Unauthorized access. Please provide a valid token.",
-            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = ErrorResponse.class)))
     @ApiResponse(responseCode = "400",
             description = "Incorrect previous password.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorResponse.class)))
     @ApiResponse(responseCode = "400",
             description = "Validation error in the request body.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "401",
+            description = "Unauthorized - Authentication failure.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "403",
+            description = "Forbidden - Access denied.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorResponse.class)))
     @Operation(method = "Change password")

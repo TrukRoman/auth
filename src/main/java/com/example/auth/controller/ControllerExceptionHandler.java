@@ -11,6 +11,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -54,6 +55,20 @@ public class ControllerExceptionHandler {
                 .error(CONSTRAINT_FAILED)
                 .description(CONSTRAINT_FAILED_DESC)
                 .details(fieldErrors)
+                .build();
+
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({MissingServletRequestParameterException.class})
+    public ResponseEntity<ErrorResponse> handleMissingServletRequestParameterException(
+            MissingServletRequestParameterException exception,
+            WebRequest request
+    ) {
+        log.error("Unexpected error occurred during request {}", request.toString(), exception);
+        var response = ErrorResponse.builder()
+                .error(CONSTRAINT_FAILED)
+                .description(exception.getMessage())
                 .build();
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

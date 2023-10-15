@@ -81,6 +81,14 @@ public class AuthenticationController {
             description = "Unauthorized access. Please provide a valid token.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "401",
+            description = "Unauthorized - Authentication failure.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "403",
+            description = "Forbidden - Access denied.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
     @ApiResponse(responseCode = "404",
             description = "User not found.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,

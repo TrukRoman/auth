@@ -51,6 +51,14 @@ public class AdminController {
             description = "Validation error in the request parameters.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "401",
+            description = "Unauthorized - Authentication failure.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "403",
+            description = "Forbidden - Access denied.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
     @Operation(method = "Get all users")
     @GetMapping(value = "/user/all")
     public ResponseEntity<Page<UserInfoDto>> getAllUserList(
@@ -63,12 +71,20 @@ public class AdminController {
             description = "Successful response with User's details.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = UserDetailsDto.class)))
-    @ApiResponse(responseCode = "404",
-            description = "User not found.",
-            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = ErrorResponse.class)))
     @ApiResponse(responseCode = "400",
             description = "Validation error in the request.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "401",
+            description = "Unauthorized - Authentication failure.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "403",
+            description = "Forbidden - Access denied.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "404",
+            description = "User not found.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorResponse.class)))
     @Operation(method = "Get user's details by email")
@@ -86,6 +102,14 @@ public class AdminController {
             description = "Validation error in the request.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "401",
+            description = "Unauthorized - Authentication failure.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "403",
+            description = "Forbidden - Access denied.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
     @Operation(method = "Get users by firstname and lastname")
     @GetMapping(value = "/user/search")
     public ResponseEntity<Page<UserDetailsDto>> searchUserByFirstNameAndLastName(
@@ -100,12 +124,20 @@ public class AdminController {
             description = "Successful response with updated User's details.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = UpdateUserResponse.class)))
-    @ApiResponse(responseCode = "404",
-            description = "User not found.",
-            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = ErrorResponse.class)))
     @ApiResponse(responseCode = "400",
             description = "Validation error in the request.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "401",
+            description = "Unauthorized - Authentication failure.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "403",
+            description = "Forbidden - Access denied.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "404",
+            description = "User not found.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorResponse.class)))
     @Operation(method = "Update user data")
@@ -125,6 +157,14 @@ public class AdminController {
                     schema = @Schema(implementation = ErrorResponse.class)))
     @ApiResponse(responseCode = "400",
             description = "Validation error in the request.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "401",
+            description = "Unauthorized - Authentication failure.",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = ErrorResponse.class)))
+    @ApiResponse(responseCode = "403",
+            description = "Forbidden - Access denied.",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorResponse.class)))
     @Operation(method = "Remove users")
