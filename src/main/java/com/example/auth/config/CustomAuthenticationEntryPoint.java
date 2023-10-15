@@ -8,9 +8,12 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
+/**
+ * This class handles unsuccessful JWT authentication.
+ */
 @RequiredArgsConstructor
 @Component
-public class DelegatedAuthenticationEntryPoint implements AuthenticationEntryPoint {
+public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     private final HandlerExceptionResolver handlerExceptionResolver;
 
@@ -18,6 +21,7 @@ public class DelegatedAuthenticationEntryPoint implements AuthenticationEntryPoi
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
                          AuthenticationException authException) {
-        handlerExceptionResolver.resolveException(request, response, null, authException);
+        this.handlerExceptionResolver.resolveException(request, response, null, authException);
     }
+
 }

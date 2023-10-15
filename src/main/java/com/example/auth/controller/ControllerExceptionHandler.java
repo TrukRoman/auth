@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,13 +26,11 @@ import java.util.Map;
 public class ControllerExceptionHandler {
 
     private static final String UNEXPECTED_EXCEPTION = "unexpected_exception";
-
     private static final String CONSTRAINT_FAILED = "constraint_failed";
     private static final String CONSTRAINT_FAILED_DESC = "Validation on one or more fields has failed. See more in details.";
-
     private static final String ACCESS_DENIED = "access_denied";
     private static final String ACCESS_DENIED_DESC = "Insufficient authority.";
-
+    private static final String NO_PERMISSIONS = "No permission to get this resource";
     private static final String AUTHENTICATION_ERROR = "authentication_error";
 
     private static final String BAD_CREDENTIALS = "bad_credentials";
@@ -80,6 +79,17 @@ public class ControllerExceptionHandler {
         if (SecurityContextHolder.getContext().getAuthentication() == null) {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
+
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ErrorResponse> handleAccessDeniedException(AccessDeniedException ex) {
+
+        var response = ErrorResponse.builder()
+                .error(ACCESS_DENIED)
+                .description(NO_PERMISSIONS)
+                .build();
 
         return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
     }
