@@ -36,7 +36,7 @@ public class ControllerExceptionHandler {
     private static final String BAD_CREDENTIALS = "bad_credentials";
     private static final String BAD_CREDENTIALS_DESC = "Invalid username or password.";
 
-    @ExceptionHandler({ MethodArgumentNotValidException.class })
+    @ExceptionHandler({MethodArgumentNotValidException.class})
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(
             MethodArgumentNotValidException exception) {
 
