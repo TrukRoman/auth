@@ -92,9 +92,9 @@ public class UserService {
     }
 
     @Transactional
-    public UserInfoDto updateCurrentUserInfo(UserInfoEditRequest request) {
-        User user = userMapper.mapUserInfoEditRequestToUser(request, SecurityUtils.getUser());
-
+    public UserInfoDto updateCurrentUserInfo(UserInfoEditRequest request,
+                                             Long userId) {
+        User user = userMapper.mapUserInfoEditRequestToUser(request, findUserById(userId));
         if (request.phoneNumbers() != null) {
             user.setPhoneNumbers(createPhoneNumbers(request.phoneNumbers(), user));
         }
@@ -121,6 +121,11 @@ public class UserService {
     public UserDetailsDto getAdminInfo() {
         User adminUser = userRepository.findAdmin().orElseThrow(() -> new ServiceException(USER_NOT_FOUND));
         return userMapper.mapToUserDetails(adminUser);
+    }
+
+    public User findUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ServiceException(USER_NOT_FOUND));
     }
 
     public User findUserByEmail(String email) {

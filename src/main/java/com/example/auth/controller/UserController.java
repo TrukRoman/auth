@@ -4,6 +4,7 @@ import com.example.auth.dto.user.UserDetailsDto;
 import com.example.auth.dto.user.UserInfoDto;
 import com.example.auth.dto.user.UserInfoEditRequest;
 import com.example.auth.dto.error.ErrorResponse;
+import com.example.auth.entity.User;
 import com.example.auth.service.UserService;
 import com.example.auth.util.SecurityUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -69,7 +70,8 @@ public class UserController {
     @Operation(method = "Edit user info")
     @PutMapping(value = "/info/edit")
     public ResponseEntity<UserInfoDto> editUserInfo(@RequestBody UserInfoEditRequest userInfoEditRequest) {
-        UserInfoDto userInfoDto = userService.updateCurrentUserInfo(userInfoEditRequest);
+        User user = SecurityUtils.getUser();
+        UserInfoDto userInfoDto = userService.updateCurrentUserInfo(userInfoEditRequest, user.getId());
         return ResponseEntity.ok(userInfoDto);
     }
 
