@@ -11,7 +11,7 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.example.auth.config.JwtAuthenticationFilter.BEARER;
+import static com.example.auth.config.security.JwtAuthenticationFilter.BEARER;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @Service

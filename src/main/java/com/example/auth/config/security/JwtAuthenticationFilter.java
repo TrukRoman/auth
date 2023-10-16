@@ -1,4 +1,4 @@
-package com.example.auth.config;
+package com.example.auth.config.security;
 
 import com.example.auth.entity.AccessToken;
 import com.example.auth.repository.AccessTokenRepository;

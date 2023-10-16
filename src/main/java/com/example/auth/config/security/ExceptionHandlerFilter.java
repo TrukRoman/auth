@@ -1,4 +1,4 @@
-package com.example.auth.config;
+package com.example.auth.config.security;
 
 import com.example.auth.dto.error.ErrorResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
